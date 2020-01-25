@@ -124,6 +124,8 @@ public class HandEvaluator {
          hasFlush();
          isStraight();
      if(hasFlush&&hasStraight){
+         //get subset of flush cards, then test for straight
+         //subset can be 5<x<13
          hasStraightFlush=true;
          System.out.println("Not Yet implemented");
      

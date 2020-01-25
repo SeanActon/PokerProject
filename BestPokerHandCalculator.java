@@ -7,6 +7,7 @@ package main;
 /*
 planned features-
 
+0.get card subsets
 1.diplay winning hands.
 2.Calculate Hands
 
