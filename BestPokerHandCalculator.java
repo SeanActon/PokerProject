@@ -7,7 +7,7 @@ package main;
 /*
 planned features-
 
-1.diplay winning hand
+1.diplay winning hands.
 2.Calculate Hands
 3.Weigh Hands properly
 4.Jokers

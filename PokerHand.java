@@ -1,5 +1,5 @@
 /*
- * This creates a poker hand, based off the program.
+ * This creates a poker hand, based off the program.1
  */
 package main;
 
