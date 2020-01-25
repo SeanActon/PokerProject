@@ -1,0 +1,54 @@
+/*
+ * This creates a poker hand, based off the program.
+ */
+package main;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.Random;
+
+/**
+ *
+ * @author Sean
+ */
+public class PokerHand  {
+    private ArrayList<PlayingCard> hand=new ArrayList<PlayingCard>();
+    private final Random rng = new Random();
+    private Deck deck=new Deck();
+    
+    private void drawCard(){
+    int cardToDraw;
+    boolean cardDrawn=false;
+    do{cardToDraw=rng.nextInt(deck.getDeck().size());
+    if(!deck.getCardsDrawn()[cardToDraw]){
+    cardDrawn=true;
+    deck.setCardsDrawnToTrue(cardToDraw);
+    hand.add(deck.getDeck().get(cardToDraw));
+    }
+    }while(cardDrawn==false);
+    }
+    
+    public PokerHand(int draw){
+    for(int i=0;i<draw;i++){
+    drawCard();
+         }
+    }
+    
+    public String toString(){
+    String message="";
+    for(int i=0;i<hand.size();i++){
+    message+=hand.get(i).toString();
+        
+            }
+    return message;
+    }
+
+    public ArrayList<PlayingCard> getHand() {
+        return hand;
+    }
+    
+    
+    
+}
