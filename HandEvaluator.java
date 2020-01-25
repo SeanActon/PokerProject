@@ -17,23 +17,33 @@ public class HandEvaluator {
     private int []flush;
     private boolean []straightItem;
     private String HighestHandRank;
+    
+    private int numberOfWildCards=0;
     //hands listed in rank.
     //High Card
     private boolean hasPair; //done
+    private int numbofPair;
     private boolean hasTwoPair; //done
+    private int[] numbofTwoPair=new int[2];
     private boolean hasThreePair; //done
+    private int numbofThreePair;
     private boolean hasStraight; //done
     private boolean hasFlush; 
     private boolean hasFullHouse; //done
+    private int[] numberofFullHouse=new int[2];
     private boolean hasFourPair; //done
+    private int numbofFourPair;
     private boolean hasFivePair; //requires wild-card
+    private int numbofFivePair;
     private boolean hasStraightFlush;
     
     public HandEvaluator(PokerHand _playHand){
+        
         //puts it all together
     playHand=_playHand;
     pairs=evaluatePairs();
     flush=evaluateSuits();
+    hasWildCard();
     evaluateStraight();
     isStraight();
     hasPair();
@@ -48,6 +58,8 @@ public class HandEvaluator {
     
     
     }
+    
+    
     public int[] evaluatePairs(){
     int pairs[]=new int[13];
     int value;
@@ -55,7 +67,7 @@ public class HandEvaluator {
     value=playHand.getHand().get(i).getValue();
     if(value==99){
     for(int k=0;k<pairs.length;k++){
-    pairs[k]++;
+ //   pairs[k]++;
     }
     }
     else{
@@ -68,6 +80,7 @@ public class HandEvaluator {
     public void hasPair(){
     for(int i=0;i<pairs.length;i++){
         if(pairs[i]==2){
+            numbofPair=i;
         hasPair=true;
         }
     }
@@ -75,8 +88,10 @@ public class HandEvaluator {
     public void hasTwoPair(){
     for(int i=0;i<pairs.length;i++){
         if(pairs[i]==2){
+            numbofTwoPair[0]=i;
             for(int k=0;k<pairs.length;k++){
                 if(pairs[k]==2&&i!=k){
+                    numbofTwoPair[1]=k;
         hasTwoPair=true;}}
         }
     }
@@ -84,12 +99,14 @@ public class HandEvaluator {
     public void hasThreePair(){
     for(int i=0;i<pairs.length;i++){
         if(pairs[i]==3){
+            numbofThreePair=i;
         hasThreePair=true;
         }
     }
     }
     public void hasFourPair(){
     for(int i=0;i<pairs.length;i++){
+        numbofFourPair=i;
         if(pairs[i]==4){
         hasFourPair=true;
         }
@@ -98,6 +115,7 @@ public class HandEvaluator {
     public void hasFivePair(){
     for(int i=0;i<pairs.length;i++){
         if(pairs[i]>=5){
+            numbofFivePair=i;
         hasFivePair=true;
         }
     }
@@ -123,7 +141,7 @@ public class HandEvaluator {
     suit=charToNumb(playHand.getHand().get(i).getSuitType());
     if(suit==99){
     for(int k=0;k<flush.length;k++){
-    flush[k]++;
+  //  flush[k]++;
     }
     }
     else{
@@ -138,14 +156,19 @@ public class HandEvaluator {
     int tempCardValue;
         for(int i=0;i<playHand.getHand().size();i++){
         tempCardValue=playHand.getHand().get(i).getValue();
+        if(tempCardValue==99){
+        tempCardValue=0;
+        }
         straightItem[tempCardValue]=true;
         }
     }
     public void hasFullHouse(){
     for(int i=0;i<pairs.length;i++){
         if(pairs[i]==3){
+            numberofFullHouse[0]=i;
             for(int k=0;k<pairs.length;k++){
                 if(pairs[k]==2){
+                    numberofFullHouse[1]=k;
         hasFullHouse=true;}}
         }
     }
@@ -221,6 +244,15 @@ public class HandEvaluator {
         }
     return message;
     }
+    
+    public void hasWildCard(){
+    for(int i=0;i<playHand.getHand().size();i++){
+    if('W'==playHand.getHand().get(i).getSuitType()){
+    numberOfWildCards++;
+    };
+    }
+      }
+    
     public void calculateHighestHandRank(){
     HighestHandRank="You got a ";
         if(hasStraightFlush){
@@ -293,6 +325,10 @@ public class HandEvaluator {
 
     public String getHighestHandRank() {
         return HighestHandRank;
+    }
+
+    public int getNumberOfWildCards() {
+        return numberOfWildCards;
     }
     
    

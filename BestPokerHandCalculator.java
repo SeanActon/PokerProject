@@ -9,7 +9,7 @@ planned features-
 
 1.diplay winning hands.
 2.Calculate Hands
-3.Weigh Hands properly
+
 4.Jokers
 5.Alternative input, pull from tts?.
 */
@@ -24,10 +24,11 @@ public class BestPokerHandCalculator {
      */
     public static void main(String[] args) {
         // TODO code application logic here;
-       
-       boolean forpair=false;
-       int z=0;
+       boolean forPair=false;
         
+       
+       int z=0;
+        do{
             z++;
         int []pairs;
         int []flush;
@@ -68,11 +69,14 @@ System.out.println("open---------------------------\n \n ");
             System.out.println(rate.isHasFullHouse());
             System.out.println("Has straight flush");
             System.out.println(rate.isHasStraightFlush());
-        forpair=rate.isHasFourPair();
-        
+            
+       forPair=true;
+            
         System.out.println("total is "+z);
+            System.out.println("Wild Cards are "+rate.getNumberOfWildCards());
         System.out.println(rate.getHighestHandRank());
         
+       }while(false);
     }}
     
     
