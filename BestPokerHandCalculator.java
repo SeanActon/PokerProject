@@ -27,11 +27,11 @@ public class BestPokerHandCalculator {
        
        boolean forpair=false;
        int z=0;
-        do{
+        
             z++;
         int []pairs;
         int []flush;
-         PokerHand pHand = new PokerHand(12);
+         PokerHand pHand = new PokerHand(5);
          
          HandEvaluator rate = new HandEvaluator(pHand);
          pairs=rate.evaluatePairs();
@@ -69,8 +69,9 @@ System.out.println("open---------------------------\n \n ");
             System.out.println("Has straight flush");
             System.out.println(rate.isHasStraightFlush());
         forpair=rate.isHasFourPair();
-        }while(forpair==false);
+        
         System.out.println("total is "+z);
+        System.out.println(rate.getHighestHandRank());
         
     }}
     

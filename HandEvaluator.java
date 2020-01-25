@@ -16,7 +16,7 @@ public class HandEvaluator {
     private int []pairs;
     private int []flush;
     private boolean []straightItem;
-    
+    private String HighestHandRank;
     //hands listed in rank.
     //High Card
     private boolean hasPair; //done
@@ -44,6 +44,9 @@ public class HandEvaluator {
     hasFullHouse();
     hasFlush();
     hasStraightFlush();
+    calculateHighestHandRank();
+    
+    
     }
     public int[] evaluatePairs(){
     int pairs[]=new int[13];
@@ -73,7 +76,7 @@ public class HandEvaluator {
     for(int i=0;i<pairs.length;i++){
         if(pairs[i]==2){
             for(int k=0;k<pairs.length;k++){
-                if(pairs[k]==2){
+                if(pairs[k]==2&&i!=k){
         hasTwoPair=true;}}
         }
     }
@@ -218,6 +221,39 @@ public class HandEvaluator {
         }
     return message;
     }
+    public void calculateHighestHandRank(){
+    HighestHandRank="You got a ";
+        if(hasStraightFlush){
+    HighestHandRank+="Straight Flush!";
+    }
+    else if(hasFivePair){
+    HighestHandRank+="Five of a Kind!";
+    }
+    else if(hasFourPair){
+    HighestHandRank+="Four of a Kind!";    
+    }
+    else if(hasFullHouse){
+    HighestHandRank+="Full House!";
+    }
+    else if(hasFlush){
+    HighestHandRank+="Flush!";
+    }
+    else if(hasStraight){
+    HighestHandRank+="Straight!";
+    }
+    else if(hasThreePair){
+    HighestHandRank+="Three of a Kind!";
+    }
+    else if(hasTwoPair){
+        HighestHandRank+="Two Pairs!";
+    }
+    else if(hasPair){
+     HighestHandRank+="Pair!";
+    }
+    else{
+        HighestHandRank+="High Card!";
+    }   
+    }
 
     public boolean isHasPair() {
         return hasPair;
@@ -253,6 +289,10 @@ public class HandEvaluator {
 
     public boolean isHasStraightFlush() {
         return hasStraightFlush;
+    }
+
+    public String getHighestHandRank() {
+        return HighestHandRank;
     }
     
    
