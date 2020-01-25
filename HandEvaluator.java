@@ -19,13 +19,13 @@ public class HandEvaluator {
     
     //hands listed in rank.
     //High Card
-    private boolean hasPair;
-    private boolean hasTwoPair;
-    private boolean hasThreePair;
-    private boolean hasStraight;
-    private boolean hasFlush;
-    private boolean hasFullHouse;
-    private boolean hasFourPair;
+    private boolean hasPair; //done
+    private boolean hasTwoPair; //done
+    private boolean hasThreePair; //done
+    private boolean hasStraight; //done
+    private boolean hasFlush; 
+    private boolean hasFullHouse; //done
+    private boolean hasFourPair; //done
     private boolean hasFivePair; //requires wild-card
     private boolean hasStraightFlush;
     
@@ -35,10 +35,15 @@ public class HandEvaluator {
     pairs=evaluatePairs();
     flush=evaluateSuits();
     evaluateStraight();
-    garbage();
-    
     isStraight();
-    
+    hasPair();
+    hasTwoPair();
+    hasThreePair();
+    hasFourPair();
+    hasFivePair();
+    hasFullHouse();
+    hasFlush();
+    hasStraightFlush();
     }
     public int[] evaluatePairs(){
     int pairs[]=new int[13];
@@ -56,6 +61,56 @@ public class HandEvaluator {
     }
     return pairs;
     }
+    
+    public void hasPair(){
+    for(int i=0;i<pairs.length;i++){
+        if(pairs[i]==2){
+        hasPair=true;
+        }
+    }
+    }
+    public void hasTwoPair(){
+    for(int i=0;i<pairs.length;i++){
+        if(pairs[i]==2){
+            for(int k=0;k<pairs.length;k++){
+                if(pairs[k]==2){
+        hasTwoPair=true;}}
+        }
+    }
+    }
+    public void hasThreePair(){
+    for(int i=0;i<pairs.length;i++){
+        if(pairs[i]==3){
+        hasThreePair=true;
+        }
+    }
+    }
+    public void hasFourPair(){
+    for(int i=0;i<pairs.length;i++){
+        if(pairs[i]==4){
+        hasFourPair=true;
+        }
+    }
+    }
+    public void hasFivePair(){
+    for(int i=0;i<pairs.length;i++){
+        if(pairs[i]>=5){
+        hasFivePair=true;
+        }
+    }
+    }
+     public void hasStraightFlush(){
+         hasFlush();
+         isStraight();
+     if(hasFlush&&hasStraight){
+         hasStraightFlush=true;
+         System.out.println("Not Yet implemented");
+     
+     }
+     
+     }
+    
+   
     
     public int[] evaluateSuits(){
     int flush[]=new int[4];
@@ -82,25 +137,25 @@ public class HandEvaluator {
         tempCardValue=playHand.getHand().get(i).getValue();
         straightItem[tempCardValue]=true;
         }
-    garbage();
     }
-    public void garbage(){
-  /*  straightItem=new boolean[13];
-    straightItem[0]=false;
-    straightItem[1]=false;
-    straightItem[2]=false;
-    straightItem[3]=true;
-    straightItem[4]=false;
-    straightItem[5]=false;
-    straightItem[6]=false;
-    straightItem[7]=false;
-    straightItem[8]=true;
-    straightItem[9]=true;
-    straightItem[10]=true;
-    straightItem[11]=true;
-    straightItem[12]=false;*/
-       // System.out.print("Ignore");
+    public void hasFullHouse(){
+    for(int i=0;i<pairs.length;i++){
+        if(pairs[i]==3){
+            for(int k=0;k<pairs.length;k++){
+                if(pairs[k]==2){
+        hasFullHouse=true;}}
+        }
     }
+    }
+    public void hasFlush(){
+   for(int i=0;i<flush.length;i++){
+        if(flush[i]>=5){
+        hasFlush=true;
+        }
+                }
+    }
+    
+   
     public void isStraight(){
       int sequence=0;
       boolean isPos=true;

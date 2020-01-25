@@ -7,6 +7,7 @@ package main;
 /*
 planned features-
 
+1.diplay winning hand
 2.Calculate Hands
 3.Weigh Hands properly
 4.Jokers
@@ -22,12 +23,15 @@ public class BestPokerHandCalculator {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
-       boolean straightFound=false;
+        // TODO code application logic here;
+       
+       boolean forpair=false;
+       int z=0;
         do{
+            z++;
         int []pairs;
         int []flush;
-         PokerHand pHand = new PokerHand(5);
+         PokerHand pHand = new PokerHand(12);
          
          HandEvaluator rate = new HandEvaluator(pHand);
          pairs=rate.evaluatePairs();
@@ -46,13 +50,28 @@ public class BestPokerHandCalculator {
 //    }
 System.out.println(rate.toString());
 System.out.println("open---------------------------\n \n ");
+         System.out.println("has straight");
          System.out.println(rate.isHasStraight());
+            System.out.println("has flush");
+            System.out.println(rate.isHasFlush());
+         System.out.println("has pair");
+         System.out.println(rate.isHasPair());
+         System.out.println("has 2 pair");
+         System.out.println(rate.isHasTwoPair());
+         System.out.println("has 3 pair");
+         System.out.println(rate.isHasThreePair());
+         System.out.println("has 4 pair");
+         System.out.println(rate.isHasFourPair());
+         System.out.println("has 5 pair");
+         System.out.println(rate.isHasFivePair());
+            System.out.println("has full house");
+            System.out.println(rate.isHasFullHouse());
+            System.out.println("Has straight flush");
+            System.out.println(rate.isHasStraightFlush());
+        forpair=rate.isHasFourPair();
+        }while(forpair==false);
+        System.out.println("total is "+z);
         
-         if(rate.isHasStraight()){
-         straightFound=true;
-         }
-        
-        }while(!straightFound);
     }}
     
     
