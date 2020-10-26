@@ -28,6 +28,7 @@ public class HandEvaluator {
     private boolean hasThreePair; //done
     private int numbofThreePair;
     private boolean hasStraight; //done
+    private char flushSuit;
     private boolean hasFlush; 
     private boolean hasFullHouse; //done
     private int[] numberofFullHouse=new int[2];
@@ -35,6 +36,7 @@ public class HandEvaluator {
     private int numbofFourPair;
     private boolean hasFivePair; //requires wild-card
     private int numbofFivePair;
+    private int straightHighValue;
     private boolean hasStraightFlush;
     
     public HandEvaluator(PokerHand _playHand){
@@ -54,11 +56,8 @@ public class HandEvaluator {
     hasFullHouse();
     hasFlush();
     hasStraightFlush();
-    calculateHighestHandRank();
-    
-    
+    calculateHighestHandRank();   
     }
-    
     
     public int[] evaluatePairs(){
     int pairs[]=new int[13];
@@ -106,8 +105,9 @@ public class HandEvaluator {
     }
     public void hasFourPair(){
     for(int i=0;i<pairs.length;i++){
-        numbofFourPair=i;
+        
         if(pairs[i]==4){
+            numbofFourPair=i;
         hasFourPair=true;
         }
     }
@@ -179,6 +179,14 @@ public class HandEvaluator {
    for(int i=0;i<flush.length;i++){
         if(flush[i]>=5){
         hasFlush=true;
+        switch(i){
+            case 0: flushSuit='H';break;
+            case 1: flushSuit='D';break;
+            case 2: flushSuit='C';break;
+            case 3: flushSuit='S';break;
+            
+            
+        }
         }
                 }
     }
@@ -199,6 +207,7 @@ public class HandEvaluator {
     }
     if(sequence==5){
     hasStraight=true;
+    straightHighValue=k;
     }
     }
     }
@@ -255,38 +264,100 @@ public class HandEvaluator {
     }
       }
     
-    public void calculateHighestHandRank(){
+    public PokerHand calculateHighestHandRank(){
     HighestHandRank="You got a ";
+    PokerHand winHand = new PokerHand(0);
         if(hasStraightFlush){
-    HighestHandRank+="Straight Flush!";
+    HighestHandRank+="Straight Flush!";    //////////IMPLEMENT
     }
     else if(hasFivePair){
     HighestHandRank+="Five of a Kind!";
+    char tempChar='h';
+    for(int i=0;i<playHand.getHand().size();i++)
+         if(playHand.getHand().get(i).getValue()==numbofFivePair){
+             tempChar=playHand.getHand().get(i).getSuitType();
+     winHand.getHand().add(new PlayingCard(tempChar,numbofFivePair));}
     }
     else if(hasFourPair){
     HighestHandRank+="Four of a Kind!";    
+    char tempChar='h';
+    for(int i=0;i<playHand.getHand().size();i++)
+         if(playHand.getHand().get(i).getValue()==numbofFourPair){
+             tempChar=playHand.getHand().get(i).getSuitType();
+     winHand.getHand().add(new PlayingCard(tempChar,numbofFourPair));}
     }
     else if(hasFullHouse){
     HighestHandRank+="Full House!";
+     char tempChar='h';
+    for(int i=0;i<playHand.getHand().size();i++)
+         if(playHand.getHand().get(i).getValue()==numbofThreePair){
+             tempChar=playHand.getHand().get(i).getSuitType();
+     winHand.getHand().add(new PlayingCard(tempChar,numbofThreePair));}
+    for(int i=0;i<playHand.getHand().size();i++)
+         if(playHand.getHand().get(i).getValue()==numbofPair){
+             tempChar=playHand.getHand().get(i).getSuitType();
+     winHand.getHand().add(new PlayingCard(tempChar,numbofPair));}
     }
     else if(hasFlush){
     HighestHandRank+="Flush!";
+    for(int i=0;i<playHand.getHand().size();i++){
+        if(playHand.getHand().get(i).getSuitType()==flushSuit){
+        winHand.getHand().add(playHand.getHand().get(i));
+        }
+    }
     }
     else if(hasStraight){
     HighestHandRank+="Straight!";
+    //System.out.println(straightHighValue);
+    int tempoers=straightHighValue;
+    boolean notYetFound=true;
+    for(int k=0;k<5;k++){
+    for(int i=0;i<playHand.getHand().size();i++){
+        if (playHand.getHand().get(i).getValue()==tempoers-1 && notYetFound) {
+            winHand.getHand().add(playHand.getHand().get(i));
+            notYetFound=false;
+                       
+        }
+    }
+     tempoers--;
+     notYetFound=true;
+    }
     }
     else if(hasThreePair){
     HighestHandRank+="Three of a Kind!";
+    char tempChar='h';
+     for(int i=0;i<playHand.getHand().size();i++)
+         if(playHand.getHand().get(i).getValue()==numbofThreePair){
+             tempChar=playHand.getHand().get(i).getSuitType();
+     winHand.getHand().add(new PlayingCard(tempChar,numbofThreePair));}
     }
     else if(hasTwoPair){
-        HighestHandRank+="Two Pairs!";
+        HighestHandRank+="Two Pairs!"; 
+        char tempChar='h';
+     for(int i=0;i<playHand.getHand().size();i++)
+         if(playHand.getHand().get(i).getValue()==numbofTwoPair[0]){
+             tempChar=playHand.getHand().get(i).getSuitType();
+     winHand.getHand().add(new PlayingCard(tempChar,numbofTwoPair[0]));}
+     for(int i=0;i<playHand.getHand().size();i++)
+         if(playHand.getHand().get(i).getValue()==numbofTwoPair[1]){
+             tempChar=playHand.getHand().get(i).getSuitType();
+     winHand.getHand().add(new PlayingCard(tempChar,numbofTwoPair[1]));}     
     }
     else if(hasPair){
      HighestHandRank+="Pair!";
+     char tempChar='h';
+     for(int i=0;i<playHand.getHand().size();i++)
+         if(playHand.getHand().get(i).getValue()==numbofPair){
+             tempChar=playHand.getHand().get(i).getSuitType();
+     winHand.getHand().add(new PlayingCard(tempChar,numbofPair));}
     }
     else{
         HighestHandRank+="High Card!";
+        winHand.getHand().add(playHand.getHand().get(0));
     }   
+        
+        
+        return winHand;
     }
 
     public boolean isHasPair() {

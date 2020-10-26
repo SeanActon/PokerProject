@@ -29,6 +29,14 @@ public class PokerHand  {
     }
     }while(cardDrawn==false);
     }
+    public void drawCard(int _toDraw){
+    for(int i=0;i<_toDraw;i++){
+    drawCard();
+        System.out.print(hand.get(hand.size()-1).toString());
+        
+    }
+    System.out.println();
+    }
     
     public PokerHand(int draw){
     for(int i=0;i<draw;i++){
