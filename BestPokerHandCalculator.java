@@ -16,6 +16,8 @@ planned features-
 3. Straight Flush<---------- 3rd
 4.Jokers<------------------------1st
 5.Alternative input, pull from tts?.<-------5th
+
+fix 1 pair, 2 pair 3 of a kind, 4 of a kind to be <= rather than exact.
 */
 /**
  *
@@ -51,7 +53,7 @@ public class BestPokerHandCalculator {
              
 
 System.out.println(rate.toString());
-System.out.println("open---------------------------\n \n ");
+System.out.println("-------------------open-------------------");
          System.out.println("has straight");
          System.out.println(rate.isHasStraight());
          System.out.println("has flush");

@@ -48,8 +48,8 @@ public class Deck {
             deck.add(new PlayingCard(currentSuit,k));
         }
    }
-    //  deck.add(new PlayingCard('W',99));
-    //  deck.add(new PlayingCard('W',99));
+      //deck.add(new PlayingCard('W',99));
+      //deck.add(new PlayingCard('W',99));
    }
    
    public boolean[] getCardsDrawn() {

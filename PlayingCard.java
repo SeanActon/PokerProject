@@ -30,7 +30,7 @@ public class PlayingCard {
         return value;
     }
     public String toString(){
-        String message="Suit : "+suitType+" Value : "+value +"\n";
+        String message=" S:"+suitType+" #:"+value +"|";
         
         return message;
     }

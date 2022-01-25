@@ -78,7 +78,7 @@ public class HandEvaluator {
     
     public void hasPair(){
     for(int i=0;i<pairs.length;i++){
-        if(pairs[i]==2){
+        if(pairs[i]>=2){
             numbofPair=i;
         hasPair=true;
         }
@@ -86,10 +86,10 @@ public class HandEvaluator {
     }
     public void hasTwoPair(){
     for(int i=0;i<pairs.length;i++){
-        if(pairs[i]==2){
+        if(pairs[i]>=2){
             numbofTwoPair[0]=i;
             for(int k=0;k<pairs.length;k++){
-                if(pairs[k]==2&&i!=k){
+                if(pairs[k]>=2&&i!=k){
                     numbofTwoPair[1]=k;
         hasTwoPair=true;}}
         }
@@ -97,7 +97,7 @@ public class HandEvaluator {
     }
     public void hasThreePair(){
     for(int i=0;i<pairs.length;i++){
-        if(pairs[i]==3){
+        if(pairs[i]>=3){
             numbofThreePair=i;
         hasThreePair=true;
         }
@@ -106,7 +106,7 @@ public class HandEvaluator {
     public void hasFourPair(){
     for(int i=0;i<pairs.length;i++){
         
-        if(pairs[i]==4){
+        if(pairs[i]>=4){
             numbofFourPair=i;
         hasFourPair=true;
         }
@@ -166,10 +166,10 @@ public class HandEvaluator {
     }
     public void hasFullHouse(){
     for(int i=0;i<pairs.length;i++){
-        if(pairs[i]==3){
+        if(pairs[i]>=3){
             numberofFullHouse[0]=i;
             for(int k=0;k<pairs.length;k++){
-                if(pairs[k]==2){
+                if(pairs[k]>=2){
                     numberofFullHouse[1]=k;
         hasFullHouse=true;}}
         }
@@ -263,6 +263,19 @@ public class HandEvaluator {
     };
     }
       }
+      public int getHighestValueCard(){
+          int value;
+          int highestValue=-1;
+          int highestCardLocation =0;
+          for(int i=0;i<playHand.getHand().size();i++){
+              value=playHand.getHand().get(i).getValue();
+              if (value>highestValue){
+                  highestValue=value;
+                  highestCardLocation=i;
+              }
+          }
+          return highestCardLocation;
+      }
     
     public PokerHand calculateHighestHandRank(){
     HighestHandRank="You got a ";
@@ -353,7 +366,8 @@ public class HandEvaluator {
     }
     else{
         HighestHandRank+="High Card!";
-        winHand.getHand().add(playHand.getHand().get(0));
+        int cardLocation=getHighestValueCard();
+        winHand.getHand().add(playHand.getHand().get(cardLocation));
     }   
         
         
