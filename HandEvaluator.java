@@ -130,6 +130,25 @@ public class HandEvaluator {
          System.out.println("Not Yet implemented");
      
      }
+
+         int sequence=0;
+         boolean isPos=true;
+         for (int i=0;i<straightItem.length;i++){
+             isPos=true;
+             sequence=0;
+             for (int k=i;i<9&&k<straightItem.length&&isPos;k++){
+                 if(straightItem[k]){
+                     sequence++;
+                 }
+                 else if(straightItem[k]==false){
+                     isPos=false;
+                 }
+                 if(sequence==5){
+                     hasStraight=true;
+                     straightHighValue=k;
+                 }
+             }
+         }
      
      }
     
