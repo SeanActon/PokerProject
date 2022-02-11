@@ -10,12 +10,8 @@ package main;
 /*
 planned features-
 
-0.get card subsets <--------- 2nd All done but for straight flush
-1.diplay winning hands.<---------4th  All done but for straight flush
-2.Calculate Hands<------------3rd All done but for straight flush
-3. Straight Flush<---------- 3rd
-4.Jokers<------------------------1st
-5.Alternative input, pull from tts?.<-------5th
+4.Jokers?<-1st
+5. High Aces? 2nd
 
 fix 1 pair, 2 pair 3 of a kind, 4 of a kind to be <= rather than exact.
 */
@@ -37,7 +33,7 @@ public class BestPokerHandCalculator {
         int []pairs;
         int []flush;
        
-         PokerHand pHand = new PokerHand(50);
+         PokerHand pHand = new PokerHand(30);
          
          HandEvaluator rate = new HandEvaluator(pHand);
          pairs=rate.evaluatePairs();
