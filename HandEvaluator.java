@@ -120,36 +120,55 @@ public class HandEvaluator {
         }
     }
     }
-     public void hasStraightFlush(){
+     public PokerHand hasStraightFlush(){
          hasFlush();
          isStraight();
+         PokerHand winHand = new PokerHand(0);
      if(hasFlush&&hasStraight){
+
          //get subset of flush cards, then test for straight
          //subset can be 5<x<13
-         hasStraightFlush=true;
-         System.out.println("Not Yet implemented");
+
+             //System.out.println(straightHighValue);
+             int tempoers=straightHighValue;
+             boolean notYetFound=true;
+             boolean dontBreakOut=true;
+             char currentSuitToFind='?';
+             for (int cycleSuits=0;cycleSuits<4&&dontBreakOut;cycleSuits++){
+
+                 if (cycleSuits==0){currentSuitToFind='H';}
+                 if (cycleSuits==1){currentSuitToFind='D';}
+                 if (cycleSuits==2){currentSuitToFind='C';}
+                 if (cycleSuits==3){currentSuitToFind='S';}
+             for (int highFlushStraight =12;highFlushStraight>0&&dontBreakOut;highFlushStraight--){
+                 tempoers=highFlushStraight;
+             for(int k=0;k<5;k++){
+                 for(int i=0;i<playHand.getHand().size();i++){
+                     if (playHand.getHand().get(i).getValue()==tempoers-1 && notYetFound && playHand.getHand().get(i).getSuitType()==currentSuitToFind){
+                         winHand.getHand().add(playHand.getHand().get(i));
+                         notYetFound=false;
+                     }
+                 }
+                 tempoers--;
+                 notYetFound=true;
+             }
+             if(winHand.getHand().size()==5){
+                 dontBreakOut=false;
+                 hasStraightFlush=true;
+             }else{
+                 winHand = new PokerHand(0);
+             }
+
+         }
+
+
+
      
      }
 
-         int sequence=0;
-         boolean isPos=true;
-         for (int i=0;i<straightItem.length;i++){
-             isPos=true;
-             sequence=0;
-             for (int k=i;i<9&&k<straightItem.length&&isPos;k++){
-                 if(straightItem[k]){
-                     sequence++;
-                 }
-                 else if(straightItem[k]==false){
-                     isPos=false;
-                 }
-                 if(sequence==5){
-                     hasStraight=true;
-                     straightHighValue=k;
-                 }
-             }
          }
-     
+
+         return winHand;
      }
     
    
@@ -301,6 +320,7 @@ public class HandEvaluator {
     PokerHand winHand = new PokerHand(0);
         if(hasStraightFlush){
     HighestHandRank+="Straight Flush!";    //////////IMPLEMENT
+            winHand=hasStraightFlush();
     }
     else if(hasFivePair){
     HighestHandRank+="Five of a Kind!";

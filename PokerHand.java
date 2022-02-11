@@ -15,7 +15,7 @@ import java.util.Random;
  */
 public class PokerHand  {
     private ArrayList<PlayingCard> hand=new ArrayList<PlayingCard>();
-    private final Random rng = new Random(10);
+    private final Random rng = new Random(97);
     private Deck deck=new Deck();
     
     private void drawCard(){

@@ -37,7 +37,7 @@ public class BestPokerHandCalculator {
         int []pairs;
         int []flush;
        
-         PokerHand pHand = new PokerHand(5);
+         PokerHand pHand = new PokerHand(50);
          
          HandEvaluator rate = new HandEvaluator(pHand);
          pairs=rate.evaluatePairs();
