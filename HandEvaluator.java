@@ -155,7 +155,15 @@ public class HandEvaluator {
              if(winHand.getHand().size()==5){
                  dontBreakOut=false;
                  hasStraightFlush=true;
-             }else{
+             } else if(winHand.getHand().size()==4&&getNumberOfWildCards()>=1){
+                 dontBreakOut=false;
+                 hasStraightFlush=true;
+
+             } else if(winHand.getHand().size()==3&&getNumberOfWildCards()>=2){
+                 dontBreakOut=false;
+                 hasStraightFlush=true;
+             }
+             else{
                  winHand = new PokerHand(0);
              }
 
